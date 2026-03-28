@@ -6,8 +6,6 @@
 
 /* --------------------------------------------------------------------------
    Announcement Bar — Underline fix
-   The theme hides text-decoration on certain contexts. Force the <u> tag
-   inside announcement text to always show its underline.
    -------------------------------------------------------------------------- */
 
 .announcement-bar__text u {
@@ -18,11 +16,10 @@
 }
 
 /* --------------------------------------------------------------------------
-   Floating Header — Transparent mode overrides
-   The design shows the header floating over the banner with a WHITE bg
-   and DARK text/logo. The native transparent mode assumes a dark bg
-   behind the header (hides default logo, shows inverse). We override
-   to keep the normal scheme-1 appearance while floating.
+   Floating Header — Card effect
+   The design shows the nav as a floating card with side margins and
+   rounded bottom corners, sitting on top of the dark banner.
+   The dark background of the banner is visible on the left/right edges.
    -------------------------------------------------------------------------- */
 
 .header[transparent] {
@@ -30,9 +27,26 @@
   --header-logo-inverse-display: none;
 }
 
-/* Ensure the underlay (white bg) is visible in transparent floating state */
+/* The header section wrapper — add horizontal margins to expose
+   the dark banner behind the header on both sides */
+.header-section {
+  margin-inline: var(--page-margin);
+}
+
+/* Round the bottom corners of the header underlays (the white bg) */
+.header .header__underlay-closed,
+.header .header__underlay-open {
+  border-radius: 0 0 var(--style-border-radius-popover, 14px) var(--style-border-radius-popover, 14px);
+}
+
+/* Ensure the underlay bg is visible in transparent floating state */
 .header[transparent] .header__underlay-closed {
   height: 100%;
+}
+
+/* The header row itself needs rounded corners to clip content */
+.header__row--top {
+  border-radius: 0 0 var(--style-border-radius-popover, 14px) var(--style-border-radius-popover, 14px);
 }
 
 /* --------------------------------------------------------------------------
@@ -47,7 +61,6 @@
 
 /* --------------------------------------------------------------------------
    Header / Nav — Mobile (max-width: 749px)
-   Design (390w): Hamburger left, logo left-aligned, cart right only.
    -------------------------------------------------------------------------- */
 
 @media screen and (max-width: 749px) {
@@ -61,6 +74,11 @@
 
   .search-action {
     display: none;
+  }
+
+  /* Tighter margins on mobile */
+  .header-section {
+    margin-inline: var(--padding-xs);
   }
 }
 
