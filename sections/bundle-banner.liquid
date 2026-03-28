@@ -12,22 +12,17 @@
 <section
   class="bundle-banner"
   id="bundle-banner-{{ section.id }}"
-  style="
-    --bundle-banner-highlight: {{ highlight_color }};
-    {% if bg_image != blank %}
-      --bundle-banner-bg-image: url('{{ bg_image | image_url: width: 2400 }}');
-    {% endif %}
-  "
+  style="--bundle-banner-highlight: {{ highlight_color }};"
 >
   {% if bg_image != blank %}
     <img
       class="bundle-banner__bg"
       src="{{ bg_image | image_url: width: 2400 }}"
       alt=""
-      loading="lazy"
+      loading="eager"
+      fetchpriority="high"
       width="{{ bg_image.width }}"
       height="{{ bg_image.height }}"
-      fetchpriority="low"
     >
   {% endif %}
 
@@ -58,9 +53,9 @@
             {{ product_image | image_url: width: 900 }} 900w,
             {{ product_image | image_url: width: 1200 }} 1200w
           "
-          sizes="(min-width: 750px) 55vw, 100vw"
-          alt="{{ product_image.alt | default: heading | escape }}"
-          loading="lazy"
+          sizes="(min-width: 750px) 50vw, 100vw"
+          alt="{{ product_image.alt | default: heading | strip_html | escape }}"
+          loading="eager"
           width="{{ product_image.width }}"
           height="{{ product_image.height }}"
         >
@@ -75,8 +70,8 @@
             {{ product_image_mobile | image_url: width: 600 }} 600w
           "
           sizes="100vw"
-          alt="{{ product_image_mobile.alt | default: heading | escape }}"
-          loading="lazy"
+          alt="{{ product_image_mobile.alt | default: heading | strip_html | escape }}"
+          loading="eager"
           width="{{ product_image_mobile.width }}"
           height="{{ product_image_mobile.height }}"
         >
@@ -97,7 +92,6 @@
     color: #fff;
   }
 
-  /* Background image — covers the full section */
   .bundle-banner__bg {
     position: absolute;
     inset: 0;
@@ -108,36 +102,37 @@
     z-index: 0;
   }
 
-  /* Container — stacked on mobile, side-by-side on desktop */
+  /* --- Container: stacked on mobile, row on desktop --- */
+
   .bundle-banner__container {
     position: relative;
     z-index: 1;
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr;
     max-width: var(--page-content-width);
     margin-inline: auto;
-    padding: 100px var(--page-margin) var(--padding-2xl);
+    padding: 80px var(--page-margin) 0;
   }
 
-  /* --- Text column --- */
+  /* --- Text --- */
 
   .bundle-banner__text {
     display: flex;
     flex-direction: column;
     gap: var(--gap-lg);
+    padding-bottom: var(--padding-2xl);
   }
 
   .bundle-banner__heading {
     font-family: var(--font-heading--family);
     font-weight: var(--font-heading--weight);
     font-style: var(--font-heading--style);
-    font-size: clamp(1.75rem, 4vw, 2.5rem);
-    line-height: 1.25;
+    font-size: clamp(1.625rem, 5vw, 2.625rem);
+    line-height: 1.3;
     color: #fff;
     margin: 0;
   }
 
-  /* Highlighted text inside heading (em tag via inline_richtext) */
   .bundle-banner__heading em {
     font-style: normal;
     color: var(--bundle-banner-highlight, #00BCDD);
@@ -148,21 +143,20 @@
     font-weight: var(--font-body--weight);
     font-size: var(--font-size--sm);
     line-height: 1.6;
-    color: rgba(255, 255, 255, 0.85);
+    color: rgba(255, 255, 255, 0.8);
     margin: 0;
-    max-width: 480px;
+    max-width: 420px;
   }
 
   .bundle-banner__cta {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: var(--padding-sm) var(--padding-2xl);
+    padding: 12px 32px;
     border: 1px solid #fff;
     border-radius: var(--style-border-radius-buttons-primary, 14px);
     color: #fff;
     font-family: var(--font-body--family);
-    font-weight: var(--font-body--weight);
     font-size: var(--font-size--sm);
     text-decoration: none;
     transition: background-color 0.2s ease, color 0.2s ease;
@@ -177,7 +171,7 @@
   /* --- Product image --- */
 
   .bundle-banner__media {
-    margin-top: var(--margin-2xl);
+    align-self: end;
   }
 
   .bundle-banner__product-image {
@@ -186,7 +180,6 @@
     display: block;
   }
 
-  /* Mobile: show mobile image, hide desktop */
   .bundle-banner__product-image--desktop {
     display: none;
   }
@@ -195,7 +188,6 @@
     display: block;
   }
 
-  /* If no mobile image uploaded, fallback to desktop on mobile */
   .bundle-banner__product-image--desktop:only-child {
     display: block;
   }
@@ -206,27 +198,13 @@
 
   @media screen and (min-width: 750px) {
     .bundle-banner__container {
-      flex-direction: row;
-      align-items: center;
-      padding: 160px var(--page-margin) 0;
-      gap: var(--gap-2xl);
-      min-height: 520px;
+      grid-template-columns: 45% 55%;
+      align-items: end;
+      padding: 140px var(--page-margin) 0;
     }
 
     .bundle-banner__text {
-      flex: 0 0 45%;
-      max-width: 45%;
-      padding-bottom: var(--padding-4xl);
-    }
-
-    .bundle-banner__heading {
-      font-size: clamp(2rem, 2.8vw, 2.625rem);
-    }
-
-    .bundle-banner__media {
-      flex: 1;
-      margin-top: 0;
-      align-self: flex-end;
+      padding-bottom: 60px;
     }
 
     .bundle-banner__product-image--desktop {
