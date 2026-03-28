@@ -3,7 +3,6 @@
   assign subheading = section.settings.subheading
   assign cta_label = section.settings.cta_label
   assign cta_link = section.settings.cta_link
-  assign bg_image = section.settings.background_image
   assign product_image = section.settings.product_image
   assign product_image_mobile = section.settings.product_image_mobile
   assign highlight_color = section.settings.highlight_color
@@ -14,35 +13,7 @@
   id="bundle-banner-{{ section.id }}"
   style="--bundle-banner-highlight: {{ highlight_color }};"
 >
-  {% if bg_image != blank %}
-    <img
-      class="bundle-banner__bg"
-      src="{{ bg_image | image_url: width: 2400 }}"
-      alt=""
-      loading="eager"
-      fetchpriority="high"
-      width="{{ bg_image.width }}"
-      height="{{ bg_image.height }}"
-    >
-  {% endif %}
-
   <div class="bundle-banner__container">
-    <div class="bundle-banner__text">
-      {% if heading != blank %}
-        <h2 class="bundle-banner__heading">{{ heading }}</h2>
-      {% endif %}
-
-      {% if subheading != blank %}
-        <p class="bundle-banner__subheading">{{ subheading }}</p>
-      {% endif %}
-
-      {% if cta_label != blank and cta_link != blank %}
-        <a href="{{ cta_link }}" class="bundle-banner__cta">
-          {{ cta_label }}
-        </a>
-      {% endif %}
-    </div>
-
     <div class="bundle-banner__media">
       {% if product_image != blank %}
         <img
@@ -77,6 +48,22 @@
         >
       {% endif %}
     </div>
+
+    <div class="bundle-banner__text">
+      {% if heading != blank %}
+        <h2 class="bundle-banner__heading">{{ heading }}</h2>
+      {% endif %}
+
+      {% if subheading != blank %}
+        <p class="bundle-banner__subheading">{{ subheading }}</p>
+      {% endif %}
+
+      {% if cta_label != blank and cta_link != blank %}
+        <a href="{{ cta_link }}" class="bundle-banner__cta">
+          {{ cta_label }}
+        </a>
+      {% endif %}
+    </div>
   </div>
 </section>
 
@@ -88,21 +75,11 @@
   .bundle-banner {
     position: relative;
     overflow: hidden;
-    background: #0a1e2e;
+    background: linear-gradient(to bottom, #FFFFFF 0%, #082D35 0%, #082D35 100%);
     color: #fff;
   }
 
-  .bundle-banner__bg {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center top;
-    z-index: 0;
-  }
-
-  /* --- Container: stacked on mobile, row on desktop --- */
+  /* --- Container: mobile = image top, text bottom / desktop = text left, image right --- */
 
   .bundle-banner__container {
     position: relative;
@@ -120,7 +97,7 @@
     display: flex;
     flex-direction: column;
     gap: var(--gap-lg);
-    padding-bottom: var(--padding-2xl);
+    padding-bottom: var(--padding-4xl);
   }
 
   .bundle-banner__heading {
@@ -180,6 +157,7 @@
     display: block;
   }
 
+  /* Mobile: show mobile image, hide desktop */
   .bundle-banner__product-image--desktop {
     display: none;
   }
@@ -188,6 +166,7 @@
     display: block;
   }
 
+  /* Fallback: if no mobile image, show desktop */
   .bundle-banner__product-image--desktop:only-child {
     display: block;
   }
@@ -199,11 +178,14 @@
   @media screen and (min-width: 750px) {
     .bundle-banner__container {
       grid-template-columns: 45% 55%;
+      grid-template-rows: 1fr;
       align-items: end;
       padding: 140px var(--page-margin) 0;
     }
 
+    /* Reorder: text first (left), media second (right) */
     .bundle-banner__text {
+      order: -1;
       padding-bottom: 60px;
     }
 
@@ -253,11 +235,6 @@
     {
       "type": "header",
       "content": "Media"
-    },
-    {
-      "type": "image_picker",
-      "id": "background_image",
-      "label": "Background image"
     },
     {
       "type": "image_picker",
