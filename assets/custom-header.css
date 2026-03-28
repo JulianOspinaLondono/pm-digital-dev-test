@@ -23,10 +23,12 @@
    -------------------------------------------------------------------------- */
 
 /* Keep dark logo visible (theme hides it in transparent mode) */
+/* Push card down so dark banner peeks above */
 .header[transparent] {
   --header-logo-display: block;
   --header-logo-inverse-display: none;
   --closed-underlay-height: 100%;
+  top: var(--padding-sm);
 }
 
 /* Force underlay white bg visible — needs high specificity to beat
