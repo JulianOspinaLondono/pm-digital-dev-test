@@ -18,7 +18,7 @@
   background: #fff;
   top: 12px;
   margin-inline: 40px;
-  border-radius: 0 0 14px 14px;
+  border-radius: 42px;
   overflow: hidden;
 }
 
@@ -33,9 +33,17 @@
   background-color: #fff !important;
 }
 
-/* No border on the card bottom — the rounded corners are enough */
+/* No extra border — rounded card is enough */
 .header[transparent] .header__row--top {
   border-bottom: none !important;
+}
+
+/* --- Nav links: Nunito Sans (body), color #03334D --- */
+
+#header-component .header-menu .menu-list__link {
+  color: #03334D !important;
+  font-family: var(--font-body--family) !important;
+  font-weight: var(--font-body--weight) !important;
 }
 
 /* --- Desktop (1440w) --- */
@@ -58,7 +66,22 @@
     top: 8px;
   }
 
+  /* Logo centered on mobile */
   .header__columns .header-logo {
-    justify-self: start;
+    justify-self: center;
   }
+
+  /* Hide account icon on mobile — only search + cart visible */
+  .account-button {
+    display: none !important;
+  }
+}
+
+/* Drawer mode (tablet/touch) — same as mobile */
+#header-component[data-menu-style='drawer'] .header__columns .header-logo {
+  justify-self: center;
+}
+
+#header-component[data-menu-style='drawer'] .account-button {
+  display: none !important;
 }
