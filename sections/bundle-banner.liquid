@@ -1,0 +1,311 @@
+{% liquid
+  assign heading = section.settings.heading
+  assign subheading = section.settings.subheading
+  assign cta_label = section.settings.cta_label
+  assign cta_link = section.settings.cta_link
+  assign bg_image = section.settings.background_image
+  assign product_image = section.settings.product_image
+  assign product_image_mobile = section.settings.product_image_mobile
+  assign highlight_color = section.settings.highlight_color
+%}
+
+<section
+  class="bundle-banner"
+  id="bundle-banner-{{ section.id }}"
+  style="
+    --bundle-banner-highlight: {{ highlight_color }};
+    {% if bg_image != blank %}
+      --bundle-banner-bg-image: url('{{ bg_image | image_url: width: 2400 }}');
+    {% endif %}
+  "
+>
+  {% if bg_image != blank %}
+    <img
+      class="bundle-banner__bg"
+      src="{{ bg_image | image_url: width: 2400 }}"
+      alt=""
+      loading="lazy"
+      width="{{ bg_image.width }}"
+      height="{{ bg_image.height }}"
+      fetchpriority="low"
+    >
+  {% endif %}
+
+  <div class="bundle-banner__container">
+    <div class="bundle-banner__text">
+      {% if heading != blank %}
+        <h2 class="bundle-banner__heading">{{ heading }}</h2>
+      {% endif %}
+
+      {% if subheading != blank %}
+        <p class="bundle-banner__subheading">{{ subheading }}</p>
+      {% endif %}
+
+      {% if cta_label != blank and cta_link != blank %}
+        <a href="{{ cta_link }}" class="bundle-banner__cta">
+          {{ cta_label }}
+        </a>
+      {% endif %}
+    </div>
+
+    <div class="bundle-banner__media">
+      {% if product_image != blank %}
+        <img
+          class="bundle-banner__product-image bundle-banner__product-image--desktop"
+          src="{{ product_image | image_url: width: 1200 }}"
+          srcset="
+            {{ product_image | image_url: width: 600 }} 600w,
+            {{ product_image | image_url: width: 900 }} 900w,
+            {{ product_image | image_url: width: 1200 }} 1200w
+          "
+          sizes="(min-width: 750px) 55vw, 100vw"
+          alt="{{ product_image.alt | default: heading | escape }}"
+          loading="lazy"
+          width="{{ product_image.width }}"
+          height="{{ product_image.height }}"
+        >
+      {% endif %}
+
+      {% if product_image_mobile != blank %}
+        <img
+          class="bundle-banner__product-image bundle-banner__product-image--mobile"
+          src="{{ product_image_mobile | image_url: width: 600 }}"
+          srcset="
+            {{ product_image_mobile | image_url: width: 390 }} 390w,
+            {{ product_image_mobile | image_url: width: 600 }} 600w
+          "
+          sizes="100vw"
+          alt="{{ product_image_mobile.alt | default: heading | escape }}"
+          loading="lazy"
+          width="{{ product_image_mobile.width }}"
+          height="{{ product_image_mobile.height }}"
+        >
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  /* ==========================================================================
+     Bundle Banner — Mobile first
+     ========================================================================== */
+
+  .bundle-banner {
+    position: relative;
+    overflow: hidden;
+    background: #0a1e2e;
+    color: #fff;
+  }
+
+  /* Background image — covers the full section */
+  .bundle-banner__bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    z-index: 0;
+  }
+
+  /* Container — stacked on mobile, side-by-side on desktop */
+  .bundle-banner__container {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    max-width: var(--page-content-width);
+    margin-inline: auto;
+    padding: 100px var(--page-margin) var(--padding-2xl);
+  }
+
+  /* --- Text column --- */
+
+  .bundle-banner__text {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-lg);
+  }
+
+  .bundle-banner__heading {
+    font-family: var(--font-heading--family);
+    font-weight: var(--font-heading--weight);
+    font-style: var(--font-heading--style);
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    line-height: 1.25;
+    color: #fff;
+    margin: 0;
+  }
+
+  /* Highlighted text inside heading (em tag via inline_richtext) */
+  .bundle-banner__heading em {
+    font-style: normal;
+    color: var(--bundle-banner-highlight, #00BCDD);
+  }
+
+  .bundle-banner__subheading {
+    font-family: var(--font-body--family);
+    font-weight: var(--font-body--weight);
+    font-size: var(--font-size--sm);
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.85);
+    margin: 0;
+    max-width: 480px;
+  }
+
+  .bundle-banner__cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--padding-sm) var(--padding-2xl);
+    border: 1px solid #fff;
+    border-radius: var(--style-border-radius-buttons-primary, 14px);
+    color: #fff;
+    font-family: var(--font-body--family);
+    font-weight: var(--font-body--weight);
+    font-size: var(--font-size--sm);
+    text-decoration: none;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    width: fit-content;
+  }
+
+  .bundle-banner__cta:hover {
+    background-color: #fff;
+    color: #03334D;
+  }
+
+  /* --- Product image --- */
+
+  .bundle-banner__media {
+    margin-top: var(--margin-2xl);
+  }
+
+  .bundle-banner__product-image {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* Mobile: show mobile image, hide desktop */
+  .bundle-banner__product-image--desktop {
+    display: none;
+  }
+
+  .bundle-banner__product-image--mobile {
+    display: block;
+  }
+
+  /* If no mobile image uploaded, fallback to desktop on mobile */
+  .bundle-banner__product-image--desktop:only-child {
+    display: block;
+  }
+
+  /* ==========================================================================
+     Desktop (min-width: 750px)
+     ========================================================================== */
+
+  @media screen and (min-width: 750px) {
+    .bundle-banner__container {
+      flex-direction: row;
+      align-items: center;
+      padding: 160px var(--page-margin) 0;
+      gap: var(--gap-2xl);
+      min-height: 520px;
+    }
+
+    .bundle-banner__text {
+      flex: 0 0 45%;
+      max-width: 45%;
+      padding-bottom: var(--padding-4xl);
+    }
+
+    .bundle-banner__heading {
+      font-size: clamp(2rem, 2.8vw, 2.625rem);
+    }
+
+    .bundle-banner__media {
+      flex: 1;
+      margin-top: 0;
+      align-self: flex-end;
+    }
+
+    .bundle-banner__product-image--desktop {
+      display: block;
+    }
+
+    .bundle-banner__product-image--mobile {
+      display: none;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Bundle Banner",
+  "tag": "section",
+  "class": "bundle-banner-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Smart stack, smarter price - shop curated bundles and <em>save 30%.</em>"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Clinically informed formulas that support energy, balance, and everyday wellness."
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "CTA label",
+      "default": "Shop Bundles"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "CTA link"
+    },
+    {
+      "type": "header",
+      "content": "Media"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background image"
+    },
+    {
+      "type": "image_picker",
+      "id": "product_image",
+      "label": "Product image (desktop)"
+    },
+    {
+      "type": "image_picker",
+      "id": "product_image_mobile",
+      "label": "Product image (mobile)"
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "color",
+      "id": "highlight_color",
+      "label": "Highlight text color",
+      "default": "#00BCDD"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Bundle Banner"
+    }
+  ]
+}
+{% endschema %}
