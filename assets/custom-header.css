@@ -14,9 +14,6 @@
 
 /* --- Floating Header Card --- */
 
-/* White background directly on the component.
-   The theme's underlay system collapses to 0px in transparent mode
-   and loads after this file, so we bypass it entirely. */
 #header-component.header[transparent] {
   background: #fff;
   top: 12px;
@@ -25,23 +22,23 @@
   overflow: hidden;
 }
 
-/* Keep dark logo (theme hides it in transparent mode) */
+/* Keep dark logo */
 .header[transparent] {
   --header-logo-display: block !important;
   --header-logo-inverse-display: none !important;
 }
 
-/* Override the row transparent bg so white shows through */
+/* White bg on the row */
 .header[transparent] .header__row {
   background-color: #fff !important;
 }
 
-/* Border bottom on the card */
+/* No border on the card bottom — the rounded corners are enough */
 .header[transparent] .header__row--top {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  border-bottom: none !important;
 }
 
-/* --- Desktop --- */
+/* --- Desktop (1440w) --- */
 
 @media screen and (min-width: 750px) {
   #header-component[data-menu-style='menu'] .header-menu .menu-list__link {
@@ -57,24 +54,11 @@
   }
 
   #header-component.header[transparent] {
-    margin-inline: 8px;
+    margin-inline: 16px;
     top: 8px;
   }
 
   .header__columns .header-logo {
     justify-self: start;
   }
-
-  .search-action {
-    display: none;
-  }
-}
-
-/* Drawer mode (tablet/touch) */
-#header-component[data-menu-style='drawer'] .search-action {
-  display: none;
-}
-
-#header-component[data-menu-style='drawer'] .header__columns .header-logo {
-  justify-self: start;
 }
