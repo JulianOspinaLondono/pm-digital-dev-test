@@ -354,7 +354,7 @@
       },
       "scheme-announcement-cyan": {
         "settings": {
-          "background": "#33bcdd",
+          "background": "#00BCDD",
           "foreground_heading": "#ffffff",
           "foreground": "#ffffff",
           "primary": "#ffffff",

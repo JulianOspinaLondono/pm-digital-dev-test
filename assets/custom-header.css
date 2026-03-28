@@ -76,6 +76,11 @@
   #header-component .account-button {
     display: none;
   }
+
+  /* Move search icon to the right side (theme puts it on leftB by default) */
+  #header-component .search-action {
+    grid-area: rightA;
+  }
 }
 
 /* Drawer mode (tablet/touch) — mirrors mobile */
@@ -85,4 +90,8 @@
 
 #header-component[data-menu-style='drawer'] .account-button {
   display: none;
+}
+
+#header-component[data-menu-style='drawer'] .search-action {
+  grid-area: rightA;
 }
