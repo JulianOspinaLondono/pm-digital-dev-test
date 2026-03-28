@@ -1,7 +1,7 @@
 /* ==========================================================================
    Custom Header Overrides
-   Figma design match for 1440w (desktop) and 390w (mobile) breakpoints.
-   All values use theme design tokens.
+   Figma design: floating white card header over dark banner.
+   1440w desktop / 390w mobile breakpoints.
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
@@ -16,56 +16,43 @@
 }
 
 /* --------------------------------------------------------------------------
-   Floating Header Card
-   The nav bar sits as a white card with side margins and rounded bottom
-   corners. The next section (banner) pulls up behind the header group
-   via negative margin, creating the "floating on dark bg" effect.
+   Floating Header Card — Transparent mode
+   The header uses Shopify's native transparent mode (position: absolute)
+   so the dark banner is visible behind. We override to keep the white bg
+   and dark logo, then add margins + border-radius for the card shape.
    -------------------------------------------------------------------------- */
 
-/* Side margins — expose the dark banner on left/right edges */
+/* Keep dark logo visible (theme hides it in transparent mode) */
+.header[transparent] {
+  --header-logo-display: block;
+  --header-logo-inverse-display: none;
+  --closed-underlay-height: 100%;
+}
+
+/* Force underlay white bg visible — needs high specificity to beat
+   the section's inline {% stylesheet %} which loads after this file */
+.header-section .header .header__underlay-closed {
+  height: 100%;
+}
+
+/* Side margins — dark banner visible on left/right */
 .header-section {
   margin-inline: var(--page-margin);
 }
 
-/* Rounded bottom corners on the header component */
+/* Rounded bottom corners */
 #header-component {
   border-radius: 0 0 var(--style-border-radius-popover, 14px) var(--style-border-radius-popover, 14px);
   overflow: hidden;
 }
 
-/* Round the underlay backgrounds to match */
 .header .header__underlay-closed,
 .header .header__underlay-open {
   border-radius: 0 0 var(--style-border-radius-popover, 14px) var(--style-border-radius-popover, 14px);
 }
 
 /* --------------------------------------------------------------------------
-   Header Group — Dark background bleed
-   The entire header group gets a dark bg so the exposed margins on the
-   floating card show the dark color (matching the banner below).
-   The announcement bar and header card keep their own bg on top.
-   -------------------------------------------------------------------------- */
-
-#header-group,
-.shopify-section-group-header-group {
-  background-color: var(--color-scheme-announcement-bg, #0d2b3e);
-  position: relative;
-  z-index: var(--layer-sticky, 3);
-}
-
-/* --------------------------------------------------------------------------
-   Next section overlap
-   The first section after the header group pulls up with negative margin
-   so its dark background extends behind the floating header card.
-   -------------------------------------------------------------------------- */
-
-.content-for-layout > .shopify-section:first-child {
-  margin-top: calc(var(--header-group-height, 60px) * -1);
-  padding-top: var(--header-group-height, 60px);
-}
-
-/* --------------------------------------------------------------------------
-   Header / Nav — Desktop (min-width: 750px)
+   Desktop (min-width: 750px)
    -------------------------------------------------------------------------- */
 
 @media screen and (min-width: 750px) {
@@ -75,7 +62,7 @@
 }
 
 /* --------------------------------------------------------------------------
-   Header / Nav — Mobile (max-width: 749px)
+   Mobile (max-width: 749px)
    -------------------------------------------------------------------------- */
 
 @media screen and (max-width: 749px) {
@@ -96,7 +83,7 @@
   }
 }
 
-/* Drawer mode (tablet/touch) mirrors mobile layout */
+/* Drawer mode (tablet/touch) */
 #header-component[data-menu-style='drawer'] .search-action {
   display: none;
 }
