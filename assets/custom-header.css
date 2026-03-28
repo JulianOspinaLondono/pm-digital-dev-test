@@ -1,20 +1,25 @@
 /* ==========================================================================
    Custom Header Overrides
    Floating white card header over dark banner.
+
+   Strategy: Use #id selectors (specificity 1,x,0) to beat the theme's
+   class-based rules (0,x,0) without needing !important.
    ========================================================================== */
 
-/* --- Announcement Bar — Underline fix --- */
+/* --- Announcement Bar --- */
 
-.announcement-bar__text u {
-  text-decoration: underline !important;
-  text-decoration-color: currentColor !important;
-  text-underline-offset: 2px;
+/* Underline all announcement text — matches Figma design */
+.announcement-bar .announcement-bar__text {
+  text-decoration: underline;
+  text-underline-offset: 3px;
   text-decoration-thickness: 1px;
 }
 
 /* --- Floating Header Card --- */
 
 #header-component.header[transparent] {
+  --header-logo-display: block;
+  --header-logo-inverse-display: none;
   background: #fff;
   top: 32px;
   max-width: var(--page-content-width);
@@ -23,28 +28,22 @@
   overflow: hidden;
 }
 
-/* Keep dark logo */
-.header[transparent] {
-  --header-logo-display: block !important;
-  --header-logo-inverse-display: none !important;
+/* White bg on rows — theme sets transparent, we need white */
+#header-component.header[transparent] .header__row {
+  background-color: #fff;
 }
 
-/* White bg on the row */
-.header[transparent] .header__row {
-  background-color: #fff !important;
+/* Remove default border — rounded card shape is enough */
+#header-component.header[transparent] .header__row--top {
+  border-bottom: none;
 }
 
-/* No extra border — rounded card is enough */
-.header[transparent] .header__row--top {
-  border-bottom: none !important;
-}
-
-/* --- Nav links: Nunito Sans (body), color #03334D --- */
+/* --- Nav links: body font (Nunito Sans), color #03334D --- */
 
 #header-component .header-menu .menu-list__link {
-  color: #03334D !important;
-  font-family: var(--font-body--family) !important;
-  font-weight: var(--font-body--weight) !important;
+  color: #03334D;
+  font-family: var(--font-body--family);
+  font-weight: var(--font-body--weight);
 }
 
 /* --- Desktop (1440w) --- */
@@ -73,17 +72,17 @@
     justify-self: center;
   }
 
-  /* Hide account icon on mobile — only search + cart visible */
-  .account-button {
-    display: none !important;
+  /* Hide account icon on mobile — only search + cart */
+  #header-component .account-button {
+    display: none;
   }
 }
 
-/* Drawer mode (tablet/touch) — same as mobile */
+/* Drawer mode (tablet/touch) — mirrors mobile */
 #header-component[data-menu-style='drawer'] .header__columns .header-logo {
   justify-self: center;
 }
 
 #header-component[data-menu-style='drawer'] .account-button {
-  display: none !important;
+  display: none;
 }
