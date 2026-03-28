@@ -9,6 +9,16 @@
  */
 {
   "sections": {
+    "bundle_banner_section": {
+      "type": "bundle-banner",
+      "settings": {
+        "heading": "Smart stack, smarter price - shop curated bundles and <em>save 30%.</em>",
+        "subheading": "Clinically informed formulas that support energy, balance, and everyday wellness.",
+        "cta_label": "Shop Bundles",
+        "cta_link": "",
+        "highlight_color": "#00BCDD"
+      }
+    },
     "hero_jVaWmY": {
       "type": "hero",
       "blocks": {
@@ -91,18 +101,8 @@
       }
     }
   },
-  "bundle_banner_section": {
-      "type": "bundle-banner",
-      "settings": {
-        "heading": "Smart stack, smarter price - shop curated bundles and <em>save 30%.</em>",
-        "subheading": "Clinically informed formulas that support energy, balance, and everyday wellness.",
-        "cta_label": "Shop Bundles",
-        "cta_link": "",
-        "highlight_color": "#00BCDD"
-      }
-    }
-  },
   "order": [
     "bundle_banner_section",
+    "hero_jVaWmY"
   ]
 }
