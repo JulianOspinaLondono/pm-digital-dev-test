@@ -1,7 +1,7 @@
 /* ==========================================================================
    Custom Header Overrides
    Figma design match for 1440w (desktop) and 390w (mobile) breakpoints.
-   All values use theme design tokens — no hardcoded fonts, colors, or sizes.
+   All values use theme design tokens.
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
@@ -16,37 +16,52 @@
 }
 
 /* --------------------------------------------------------------------------
-   Floating Header — Card effect
-   The design shows the nav as a floating card with side margins and
-   rounded bottom corners, sitting on top of the dark banner.
-   The dark background of the banner is visible on the left/right edges.
+   Floating Header Card
+   The nav bar sits as a white card with side margins and rounded bottom
+   corners. The next section (banner) pulls up behind the header group
+   via negative margin, creating the "floating on dark bg" effect.
    -------------------------------------------------------------------------- */
 
-.header[transparent] {
-  --header-logo-display: block;
-  --header-logo-inverse-display: none;
-}
-
-/* The header section wrapper — add horizontal margins to expose
-   the dark banner behind the header on both sides */
+/* Side margins — expose the dark banner on left/right edges */
 .header-section {
   margin-inline: var(--page-margin);
 }
 
-/* Round the bottom corners of the header underlays (the white bg) */
+/* Rounded bottom corners on the header component */
+#header-component {
+  border-radius: 0 0 var(--style-border-radius-popover, 14px) var(--style-border-radius-popover, 14px);
+  overflow: hidden;
+}
+
+/* Round the underlay backgrounds to match */
 .header .header__underlay-closed,
 .header .header__underlay-open {
   border-radius: 0 0 var(--style-border-radius-popover, 14px) var(--style-border-radius-popover, 14px);
 }
 
-/* Ensure the underlay bg is visible in transparent floating state */
-.header[transparent] .header__underlay-closed {
-  height: 100%;
+/* --------------------------------------------------------------------------
+   Header Group — Dark background bleed
+   The entire header group gets a dark bg so the exposed margins on the
+   floating card show the dark color (matching the banner below).
+   The announcement bar and header card keep their own bg on top.
+   -------------------------------------------------------------------------- */
+
+#header-group,
+.shopify-section-group-header-group {
+  background-color: var(--color-scheme-announcement-bg, #0d2b3e);
+  position: relative;
+  z-index: var(--layer-sticky, 3);
 }
 
-/* The header row itself needs rounded corners to clip content */
-.header__row--top {
-  border-radius: 0 0 var(--style-border-radius-popover, 14px) var(--style-border-radius-popover, 14px);
+/* --------------------------------------------------------------------------
+   Next section overlap
+   The first section after the header group pulls up with negative margin
+   so its dark background extends behind the floating header card.
+   -------------------------------------------------------------------------- */
+
+.content-for-layout > .shopify-section:first-child {
+  margin-top: calc(var(--header-group-height, 60px) * -1);
+  padding-top: var(--header-group-height, 60px);
 }
 
 /* --------------------------------------------------------------------------
@@ -76,7 +91,6 @@
     display: none;
   }
 
-  /* Tighter margins on mobile */
   .header-section {
     margin-inline: var(--padding-xs);
   }
