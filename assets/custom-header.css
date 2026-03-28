@@ -1,61 +1,47 @@
 /* ==========================================================================
    Custom Header Overrides
-   Figma design: floating white card header over dark banner.
-   1440w desktop / 390w mobile breakpoints.
+   Floating white card header over dark banner.
    ========================================================================== */
 
-/* --------------------------------------------------------------------------
-   Announcement Bar — Underline fix
-   -------------------------------------------------------------------------- */
+/* --- Announcement Bar — Underline fix --- */
 
 .announcement-bar__text u {
-  text-decoration: underline;
-  text-decoration-color: currentColor;
-  text-underline-offset: 0.15em;
+  text-decoration: underline !important;
+  text-decoration-color: currentColor !important;
+  text-underline-offset: 2px;
   text-decoration-thickness: 1px;
 }
 
-/* --------------------------------------------------------------------------
-   Floating Header Card — Transparent mode
-   The header uses Shopify's native transparent mode (position: absolute)
-   so the dark banner is visible behind. We override to keep the white bg
-   and dark logo, then add margins + border-radius for the card shape.
-   -------------------------------------------------------------------------- */
+/* --- Floating Header Card --- */
 
-/* Keep dark logo visible (theme hides it in transparent mode) */
-/* Push card down so dark banner peeks above */
-.header[transparent] {
-  --header-logo-display: block;
-  --header-logo-inverse-display: none;
-  --closed-underlay-height: 100%;
-  top: var(--padding-sm);
-}
-
-/* Force underlay white bg visible — needs high specificity to beat
-   the section's inline {% stylesheet %} which loads after this file */
-.header-section .header .header__underlay-closed {
-  height: 100%;
-}
-
-/* Side margins — dark banner visible on left/right */
-.header-section {
-  margin-inline: var(--page-margin);
-}
-
-/* Rounded bottom corners */
-#header-component {
-  border-radius: 0 0 var(--style-border-radius-popover, 14px) var(--style-border-radius-popover, 14px);
+/* White background directly on the component.
+   The theme's underlay system collapses to 0px in transparent mode
+   and loads after this file, so we bypass it entirely. */
+#header-component.header[transparent] {
+  background: #fff;
+  top: 12px;
+  margin-inline: 40px;
+  border-radius: 0 0 14px 14px;
   overflow: hidden;
 }
 
-.header .header__underlay-closed,
-.header .header__underlay-open {
-  border-radius: 0 0 var(--style-border-radius-popover, 14px) var(--style-border-radius-popover, 14px);
+/* Keep dark logo (theme hides it in transparent mode) */
+.header[transparent] {
+  --header-logo-display: block !important;
+  --header-logo-inverse-display: none !important;
 }
 
-/* --------------------------------------------------------------------------
-   Desktop (min-width: 750px)
-   -------------------------------------------------------------------------- */
+/* Override the row transparent bg so white shows through */
+.header[transparent] .header__row {
+  background-color: #fff !important;
+}
+
+/* Border bottom on the card */
+.header[transparent] .header__row--top {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+/* --- Desktop --- */
 
 @media screen and (min-width: 750px) {
   #header-component[data-menu-style='menu'] .header-menu .menu-list__link {
@@ -63,13 +49,16 @@
   }
 }
 
-/* --------------------------------------------------------------------------
-   Mobile (max-width: 749px)
-   -------------------------------------------------------------------------- */
+/* --- Mobile (390w) --- */
 
 @media screen and (max-width: 749px) {
   .announcement-bar .announcement-bar__text {
-    font-size: var(--font-size--3xs);
+    font-size: 10px;
+  }
+
+  #header-component.header[transparent] {
+    margin-inline: 8px;
+    top: 8px;
   }
 
   .header__columns .header-logo {
@@ -78,10 +67,6 @@
 
   .search-action {
     display: none;
-  }
-
-  .header-section {
-    margin-inline: var(--padding-xs);
   }
 }
 
