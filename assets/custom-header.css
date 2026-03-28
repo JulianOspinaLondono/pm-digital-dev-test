@@ -5,23 +5,38 @@
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
-   Announcement Bar
-   Font: --font-body (Nunito Sans 400) via JSON config
-   Size: --font-size--2xs (12px) via JSON config
-   Colors: scheme-announcement-cyan via JSON config
+   Announcement Bar — Underline fix
+   The theme hides text-decoration on certain contexts. Force the <u> tag
+   inside announcement text to always show its underline.
    -------------------------------------------------------------------------- */
 
-.announcement-bar .announcement-bar__text u {
+.announcement-bar__text u {
+  text-decoration: underline;
+  text-decoration-color: currentColor;
   text-underline-offset: 0.15em;
   text-decoration-thickness: 1px;
 }
 
 /* --------------------------------------------------------------------------
+   Floating Header — Transparent mode overrides
+   The design shows the header floating over the banner with a WHITE bg
+   and DARK text/logo. The native transparent mode assumes a dark bg
+   behind the header (hides default logo, shows inverse). We override
+   to keep the normal scheme-1 appearance while floating.
+   -------------------------------------------------------------------------- */
+
+.header[transparent] {
+  --header-logo-display: block;
+  --header-logo-inverse-display: none;
+}
+
+/* Ensure the underlay (white bg) is visible in transparent floating state */
+.header[transparent] .header__underlay-closed {
+  height: 100%;
+}
+
+/* --------------------------------------------------------------------------
    Header / Nav — Desktop (min-width: 750px)
-   Font: --font-body (Nunito Sans 400) via type_font_primary_link: "body"
-   Size: --font-size--sm (14px) via type_font_primary_size: "0.875rem"
-   Colors: scheme-1 via color_scheme_top
-   Border: var(--color-border) from scheme-1
    -------------------------------------------------------------------------- */
 
 @media screen and (min-width: 750px) {
