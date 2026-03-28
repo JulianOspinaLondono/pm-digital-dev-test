@@ -82,10 +82,10 @@
       "scheme-1": {
         "settings": {
           "background": "#ffffff",
-          "foreground_heading": "#000000",
-          "foreground": "#000000cf",
-          "primary": "#000000cf",
-          "primary_hover": "#000000",
+          "foreground_heading": "#03334D",
+          "foreground": "#03334D",
+          "primary": "#03334D",
+          "primary_hover": "#021f2f",
           "border": "#0000000f",
           "shadow": "#000000",
           "primary_button_background": "#000000",

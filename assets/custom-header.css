@@ -38,10 +38,10 @@
   border-bottom: none;
 }
 
-/* --- Nav links: body font (Nunito Sans), color #03334D --- */
+/* --- Nav links: body font (Nunito Sans), color from scheme-1 foreground --- */
 
 #header-component .header-menu .menu-list__link {
-  color: #03334D;
+  color: var(--color-foreground);
   font-family: var(--font-body--family);
   font-weight: var(--font-body--weight);
 }
