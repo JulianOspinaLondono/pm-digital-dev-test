@@ -1,0 +1,59 @@
+/* ==========================================================================
+   Custom Header Overrides
+   Figma design match for 1440w (desktop) and 390w (mobile) breakpoints.
+   All values use theme design tokens — no hardcoded fonts, colors, or sizes.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Announcement Bar
+   Font: --font-body (Nunito Sans 400) via JSON config
+   Size: --font-size--2xs (12px) via JSON config
+   Colors: scheme-announcement-cyan via JSON config
+   -------------------------------------------------------------------------- */
+
+.announcement-bar .announcement-bar__text u {
+  text-underline-offset: 0.15em;
+  text-decoration-thickness: 1px;
+}
+
+/* --------------------------------------------------------------------------
+   Header / Nav — Desktop (min-width: 750px)
+   Font: --font-body (Nunito Sans 400) via type_font_primary_link: "body"
+   Size: --font-size--sm (14px) via type_font_primary_size: "0.875rem"
+   Colors: scheme-1 via color_scheme_top
+   Border: var(--color-border) from scheme-1
+   -------------------------------------------------------------------------- */
+
+@media screen and (min-width: 750px) {
+  #header-component[data-menu-style='menu'] .header-menu .menu-list__link {
+    padding-inline: var(--padding-lg);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Header / Nav — Mobile (max-width: 749px)
+   Design (390w): Hamburger left, logo left-aligned, cart right only.
+   -------------------------------------------------------------------------- */
+
+@media screen and (max-width: 749px) {
+  .announcement-bar .announcement-bar__text {
+    font-size: var(--font-size--3xs);
+  }
+
+  .header__columns .header-logo {
+    justify-self: start;
+  }
+
+  .search-action {
+    display: none;
+  }
+}
+
+/* Drawer mode (tablet/touch) mirrors mobile layout */
+#header-component[data-menu-style='drawer'] .search-action {
+  display: none;
+}
+
+#header-component[data-menu-style='drawer'] .header__columns .header-logo {
+  justify-self: start;
+}
