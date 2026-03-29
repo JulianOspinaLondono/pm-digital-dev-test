@@ -117,10 +117,28 @@
   color: var(--color-primary);
 }
 
-.color-scheme-bundle-banner .image-block {
-  position: relative;
+/* Section border-radius bottom */
+.color-scheme-bundle-banner {
+  border-radius: 0 0 45px 45px;
+  overflow: hidden;
 }
 
+/* Image block as full-cover background */
+.color-scheme-bundle-banner .image-block {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.color-scheme-bundle-banner .image-block__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  aspect-ratio: unset;
+}
+
+/* Gradient overlay on the image */
 .color-scheme-bundle-banner .image-block::after {
   content: '';
   position: absolute;
@@ -133,4 +151,10 @@
   );
   pointer-events: none;
   z-index: 1;
+}
+
+/* Text group stays on top */
+.color-scheme-bundle-banner .group {
+  position: relative;
+  z-index: 2;
 }
