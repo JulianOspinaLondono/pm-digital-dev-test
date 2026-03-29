@@ -25,16 +25,12 @@
   max-width: var(--page-content-width);
   margin-inline: auto;
   border-radius: clamp(24px, 3.125vw, 45px);
+  overflow: clip;
 }
 
 /* White bg on rows — theme sets transparent, we need white */
 #header-component.header[transparent] .header__row {
   background-color: #fff;
-}
-
-/* Border-radius applied directly to the row */
-#header-component.header[transparent] .header__row--top {
-  border-radius: clamp(24px, 3.125vw, 45px);
 }
 
 /* Remove default border — rounded card shape is enough */
@@ -59,7 +55,12 @@
   }
 
   #header-component[data-menu-style='menu'] .header-menu .menu-list__link {
-    padding-inline: var(--padding-lg);
+    padding-inline: var(--padding-md, 12px);
+  }
+
+  /* Hide the overflow "More" button — all items should be visible */
+  #header-component .header-menu .menu-list__list-item[slot='overflow'] {
+    display: none;
   }
 }
 
