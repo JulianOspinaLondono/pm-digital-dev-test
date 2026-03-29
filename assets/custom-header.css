@@ -58,9 +58,13 @@
     padding-inline: var(--padding-md, 12px);
   }
 
-  /* Hide the overflow "More" button — all items should be visible */
-  #header-component .header-menu .menu-list__list-item[slot='overflow'] {
+  /* Hide the overflow "More" trigger and show all items inline */
+  #header-component .header-menu .overflow-menu::part(toggle) {
     display: none;
+  }
+
+  #header-component .header-menu .overflow-menu::part(list) {
+    flex-wrap: wrap;
   }
 }
 
