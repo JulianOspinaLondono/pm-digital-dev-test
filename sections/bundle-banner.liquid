@@ -1,0 +1,296 @@
+{% liquid
+  assign heading = section.settings.heading
+  assign subheading = section.settings.subheading
+  assign cta_label = section.settings.cta_label
+  assign cta_link = section.settings.cta_link
+  assign background_image = section.settings.background_image
+  assign product_image = section.settings.product_image
+  assign highlight_color = section.settings.highlight_color
+%}
+
+<section class="bundle-banner" id="bundle-banner-{{ section.id }}" aria-label="Bundle promotion banner">
+  {%- if background_image != blank -%}
+    <img
+      class="bundle-banner__bg"
+      src="{{ background_image | image_url: width: 1920 }}"
+      srcset="
+        {{ background_image | image_url: width: 780 }} 780w,
+        {{ background_image | image_url: width: 1200 }} 1200w,
+        {{ background_image | image_url: width: 1920 }} 1920w
+      "
+      sizes="100vw"
+      role="presentation"
+      alt="{{ background_image.alt | default: '' | escape }}"
+      loading="eager"
+      fetchpriority="high"
+      width="{{ background_image.width }}"
+      height="{{ background_image.height }}"
+    >
+  {%- endif -%}
+
+  {%- if product_image != blank -%}
+    <div class="bundle-banner__product-wrap">
+      <img
+        class="bundle-banner__product"
+        src="{{ product_image | image_url: width: 1200 }}"
+        srcset="
+          {{ product_image | image_url: width: 600 }} 600w,
+          {{ product_image | image_url: width: 900 }} 900w,
+          {{ product_image | image_url: width: 1200 }} 1200w
+        "
+        sizes="(min-width: 750px) 55vw, 100vw"
+        alt="{{ product_image.alt | escape }}"
+        loading="eager"
+        width="{{ product_image.width }}"
+        height="{{ product_image.height }}"
+      >
+    </div>
+  {%- endif -%}
+
+  <div class="bundle-banner__content">
+    {%- if heading != blank -%}
+      <h2 class="bundle-banner__heading">{{ heading }}</h2>
+    {%- endif -%}
+
+    {%- if subheading != blank -%}
+      <p class="bundle-banner__subheading">{{ subheading }}</p>
+    {%- endif -%}
+
+    {%- if cta_label != blank and cta_link != blank -%}
+      <a href="{{ cta_link }}" class="bundle-banner__cta">
+        {{ cta_label }}
+      </a>
+    {%- endif -%}
+  </div>
+</section>
+
+<style>
+  #bundle-banner-{{ section.id }} {
+    --bundle-banner-highlight: {{ highlight_color }};
+  }
+</style>
+
+{% stylesheet %}
+  /* ==========================================================================
+     Bundle Banner — Mobile first
+     ========================================================================== */
+
+  .bundle-banner {
+    position: relative;
+    overflow: hidden;
+    background-color: #082D35;
+    display: flex;
+    flex-direction: column;
+    border-radius: 0 0 24px 24px;
+  }
+
+  /* ---------- Background image (glow + teal) ---------- */
+
+  .bundle-banner__bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+  }
+
+  /* ---------- Product image ---------- */
+
+  .bundle-banner__product-wrap {
+    position: relative;
+    width: 100%;
+    height: 474px;
+    z-index: 1;
+  }
+
+  .bundle-banner__product-wrap::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    z-index: 1;
+    background: linear-gradient(to top, #082D35 0%, rgba(8, 45, 53, 0) 55%);
+  }
+
+  .bundle-banner__product {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+  }
+
+  /* ---------- Text content ---------- */
+
+  .bundle-banner__content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: var(--page-content-width, 1200px);
+    width: 100%;
+    margin-inline: auto;
+    padding: 0 var(--page-margin, 20px) 32px;
+  }
+
+  .bundle-banner__heading {
+    font-family: var(--font-heading--family, sans-serif);
+    font-weight: var(--font-heading--weight, 700);
+    font-style: var(--font-heading--style, normal);
+    font-size: clamp(1.375rem, 5vw, 2.625rem);
+    line-height: 1.3;
+    color: #fff;
+    margin: 0;
+    max-width: 500px;
+  }
+
+  .bundle-banner__heading em {
+    font-style: normal;
+    color: var(--bundle-banner-highlight, #00BCDD);
+  }
+
+  .bundle-banner__subheading {
+    font-family: var(--font-body--family, sans-serif);
+    font-weight: var(--font-body--weight, 400);
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.8);
+    margin: 0;
+    max-width: 400px;
+  }
+
+  .bundle-banner__cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 32px;
+    border: 1px solid #fff;
+    border-radius: var(--style-border-radius-buttons-primary, 14px);
+    color: #fff;
+    font-family: var(--font-body--family, sans-serif);
+    font-size: 0.9375rem;
+    text-decoration: none;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    width: fit-content;
+    margin-top: 8px;
+  }
+
+  .bundle-banner__cta:hover {
+    background-color: #fff;
+    color: #03334D;
+  }
+
+  /* ==========================================================================
+     Desktop (min-width: 750px)
+     ========================================================================== */
+
+  @media screen and (min-width: 750px) {
+    .bundle-banner {
+      flex-direction: row;
+      min-height: 50vh;
+      align-items: flex-end;
+      border-radius: 0 0 42px 42px;
+    }
+
+    .bundle-banner__product-wrap {
+      position: absolute;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      width: 55%;
+      height: auto;
+    }
+
+    .bundle-banner__product-wrap::before {
+      background: linear-gradient(to right, #082D35 0%, rgba(8, 45, 53, 0) 55%);
+    }
+
+    .bundle-banner__product {
+      object-position: 50% 30%;
+    }
+
+    .bundle-banner__content {
+      padding: 0 var(--page-margin, 40px) 8rem;
+      gap: 16px;
+    }
+
+    .bundle-banner__heading {
+      font-size: clamp(1.75rem, 2.6vw, 2.356rem);
+      max-width: 480px;
+    }
+
+    .bundle-banner__subheading {
+      font-size: clamp(1.125rem, 1.46vw, 1.3125rem);
+      max-width: 420px;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Bundle Banner",
+  "tag": "section",
+  "class": "bundle-banner-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Smart stack, smarter price - shop curated bundles and <em>save 30%.</em>"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Clinically informed formulas that support energy, balance, and everyday wellness."
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "CTA label",
+      "default": "Shop Bundles"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "CTA link"
+    },
+    {
+      "type": "header",
+      "content": "Images"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background image",
+      "info": "Dark background with glow effect. Covers the entire section."
+    },
+    {
+      "type": "image_picker",
+      "id": "product_image",
+      "label": "Product image",
+      "info": "Product photo displayed on the right side. PNG with transparent background recommended."
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "color",
+      "id": "highlight_color",
+      "label": "Highlight text color",
+      "default": "#00BCDD"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Bundle Banner"
+    }
+  ]
+}
+{% endschema %}

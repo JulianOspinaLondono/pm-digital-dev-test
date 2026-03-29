@@ -17,9 +17,9 @@
         "announcement_BxgCk9": {
           "type": "_announcement",
           "settings": {
-            "text": "Welcome to our store",
-            "link": "",
-            "font": "var(--font-subheading--family)",
+            "text": "<u>24 Hours Only: MLK Day Buy 1, Get 1 FREE Best Sellers</u>",
+            "link": "/collections/best-sellers",
+            "font": "var(--font-body--family)",
             "font_size": "0.75rem",
             "weight": "",
             "letter_spacing": "normal",
@@ -35,10 +35,10 @@
       "settings": {
         "speed": 5,
         "section_width": "page-width",
-        "color_scheme": "scheme-1",
-        "divider_width": 1,
-        "padding-block-start": 15,
-        "padding-block-end": 15
+        "color_scheme": "scheme-announcement-cyan",
+        "divider_width": 0,
+        "padding-block-start": 10,
+        "padding-block-end": 10
       }
     },
     "header_section": {
@@ -50,9 +50,7 @@
           "settings": {
             "hide_logo_on_home_page": false,
             "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
+            "padding-block-end": 0
           },
           "blocks": {}
         },
@@ -62,7 +60,7 @@
           "settings": {
             "menu": "main-menu",
             "color_scheme": "",
-            "type_font_primary_size": "0.875rem",
+            "type_font_primary_size": "1rem",
             "menu_font_style": "inverse",
             "type_font_primary_link": "body",
             "type_case_primary_link": "none",
@@ -81,14 +79,15 @@
       },
       "settings": {
         "logo_position": "left",
-        "menu_position": "left",
+        "menu_position": "center",
         "menu_row": "top",
+        "customer_account_menu": "customer-account-main-menu",
         "show_search": true,
         "search_position": "right",
         "search_row": "top",
-        "show_country": true,
+        "show_country": false,
         "country_selector_style": false,
-        "show_language": true,
+        "show_language": false,
         "localization_font": "heading",
         "localization_font_size": "0.875rem",
         "localization_position": "right",
@@ -98,12 +97,16 @@
         "enable_sticky_header": "always",
         "divider_width": 0,
         "divider_size": "page-width",
-        "border_width": 0,
+        "border_width": 1,
+        "actions_display_style": "icon",
+        "actions_font_size": "0.875rem",
+        "actions_font": "body",
+        "actions_text_case": "none",
         "color_scheme_top": "scheme-1",
         "color_scheme_bottom": "",
         "color_scheme_transparent": "scheme-6",
-        "enable_transparent_header_home": false,
-        "home_color_scheme": "inverse",
+        "enable_transparent_header_home": true,
+        "home_color_scheme": "default",
         "enable_transparent_header_product": false,
         "product_color_scheme": "default",
         "enable_transparent_header_collection": false,

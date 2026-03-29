@@ -1,0 +1,103 @@
+/* ==========================================================================
+   Custom Header Overrides
+   Floating white card header over dark banner.
+
+   Strategy: Use #id selectors (specificity 1,x,0) to beat the theme's
+   class-based rules (0,x,0) without needing !important.
+   ========================================================================== */
+
+/* --- Announcement Bar --- */
+
+/* Underline all announcement text — matches Figma design */
+.announcement-bar .announcement-bar__text {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+
+/* --- Floating Header Card --- */
+
+#header-component.header[transparent] {
+  --header-logo-display: block;
+  --header-logo-inverse-display: none;
+  background: #fff;
+  top: 32px;
+  max-width: calc(100% - var(--page-margin, 40px) * 2);
+  margin-inline: auto;
+  border-radius: clamp(24px, 3.125vw, 45px);
+  overflow: clip;
+}
+
+/* White bg on rows — theme sets transparent, we need white */
+#header-component.header[transparent] .header__row {
+  background-color: #fff;
+}
+
+/* Remove default border — rounded card shape is enough */
+#header-component.header[transparent] .header__row--top {
+  border-bottom: none;
+}
+
+/* --- Nav links: body font (Nunito Sans), color from scheme-1 foreground --- */
+
+#header-component .header-menu .menu-list__link {
+  color: var(--color-foreground);
+  font-family: var(--font-body--family);
+  font-weight: var(--font-body--weight);
+}
+
+/* --- Desktop (1440w) --- */
+
+@media screen and (min-width: 750px) {
+  /* Center the nav menu links within the menu list */
+  #header-component .header-menu .overflow-menu::part(list) {
+    justify-content: center;
+  }
+
+  #header-component[data-menu-style='menu'] .header-menu .menu-list__link {
+    padding-inline: var(--padding-md, 12px);
+  }
+
+}
+
+/* --- Mobile (390w) --- */
+
+@media screen and (max-width: 749px) {
+  .announcement-bar .announcement-bar__text {
+    font-size: 12px;
+  }
+
+  #header-component.header[transparent] {
+    max-width: calc(100% - 32px);
+    margin-inline: auto;
+    top: 16px;
+  }
+
+  /* Logo centered on mobile */
+  .header__columns .header-logo {
+    justify-self: center;
+  }
+
+  /* Hide account icon on mobile — only search + cart */
+  #header-component .account-button {
+    display: none;
+  }
+
+  /* Move search icon to the right side (theme puts it on left by default) */
+  #header-component .header__columns .search-action {
+    grid-area: rightA;
+  }
+}
+
+/* Drawer mode (tablet/touch) — mirrors mobile */
+#header-component[data-menu-style='drawer'] .header__columns .header-logo {
+  justify-self: center;
+}
+
+#header-component[data-menu-style='drawer'] .account-button {
+  display: none;
+}
+
+#header-component[data-menu-style='drawer'] .header__columns .search-action {
+  grid-area: rightA;
+}
