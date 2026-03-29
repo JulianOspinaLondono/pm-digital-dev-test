@@ -10,8 +10,8 @@
 {
   "current": {
     "logo": "shopify://shop_images/REVIVE_BLACK_FULL_LOGO_2_png.png",
-    "logo_height": 36,
-    "logo_height_mobile": 28,
+    "logo_height": 26,
+    "logo_height_mobile": 17,
     "type_body_font": "nunito_sans_n4",
     "type_subheading_font": "libre_baskerville_n4",
     "type_heading_font": "libre_baskerville_n7",
@@ -42,7 +42,7 @@
     "type_font_h6": "subheading",
     "type_size_h6": "12",
     "type_line_height_h6": "display-loose",
-    "page_width": "narrow",
+    "page_width": "normal",
     "page_transition_enabled": false,
     "transition_to_main_product": false,
     "card_hover_effect": "none",
