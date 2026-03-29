@@ -49,22 +49,32 @@
     overflow: hidden;
     color: #fff;
 
-    /* Gradient background */
-    background:
-      radial-gradient(ellipse at 60% 0%, rgba(0, 188, 221, 0.2) 0%, transparent 50%),
-      linear-gradient(to bottom, #0B3039 0%, #082D35 100%);
-
-    /* Product image as positioned background on the right */
+    /*
+      Background layers (bottom to top):
+      1. Base dark gradient
+      2. Cyan glow
+      3. Product image (right side)
+      4. Left-to-right dark overlay (blends product into gradient)
+    */
+    background-color: #082D35;
     background-image:
+      linear-gradient(to right, #082D35 0%, #082D35 30%, transparent 60%),
       var(--bundle-banner-product-mobile, none),
-      radial-gradient(ellipse at 50% 0%, rgba(0, 188, 221, 0.2) 0%, transparent 50%),
+      radial-gradient(ellipse at 50% 0%, rgba(0, 188, 221, 0.25) 0%, transparent 55%),
       linear-gradient(to bottom, #0B3039 0%, #082D35 100%);
-    background-position: center top, center top, center;
-    background-size: 90% auto, 100% 100%, 100% 100%;
+    background-position:
+      center,
+      center top,
+      center top,
+      center;
+    background-size:
+      100% 100%,
+      85% auto,
+      100% 100%,
+      100% 100%;
     background-repeat: no-repeat;
 
-    /* Mobile: taller to fit products on top + text below */
-    min-height: 580px;
+    min-height: 520px;
     display: flex;
     align-items: flex-end;
   }
@@ -136,13 +146,21 @@
 
   @media screen and (min-width: 750px) {
     .bundle-banner {
-      /* Desktop: product image on the right side */
       background-image:
+        linear-gradient(to right, #082D35 0%, #082D35 35%, transparent 55%),
         var(--bundle-banner-product-desktop, none),
-        radial-gradient(ellipse at 60% 0%, rgba(0, 188, 221, 0.18) 0%, transparent 50%),
+        radial-gradient(ellipse at 55% 0%, rgba(0, 188, 221, 0.2) 0%, transparent 50%),
         linear-gradient(to bottom, #0B3039 0%, #082D35 100%);
-      background-position: right bottom, center top, center;
-      background-size: 55% auto, 100% 100%, 100% 100%;
+      background-position:
+        center,
+        right center,
+        center top,
+        center;
+      background-size:
+        100% 100%,
+        60% auto,
+        100% 100%,
+        100% 100%;
       background-repeat: no-repeat;
 
       min-height: 480px;
