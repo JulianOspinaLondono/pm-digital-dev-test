@@ -102,6 +102,15 @@
    The gradient blends the product image into the dark teal background.
    ========================================================================== */
 
+/* Reset the transparent header top offset for the bundle banner.
+   The theme adds padding-top to the first section to avoid content
+   hiding behind the floating header. We remove it so the product
+   image extends to the full height of the section. */
+.color-scheme-bundle-banner.spacing-style,
+.color-scheme-bundle-banner .spacing-style {
+  --section-top-offset: 0px;
+}
+
 /* Heading highlight — <em> renders in cyan */
 .color-scheme-bundle-banner .text-block em {
   font-style: normal;
