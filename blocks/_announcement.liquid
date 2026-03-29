@@ -26,9 +26,9 @@
     {{ block.shopify_attributes }}
     aria-hidden="{% if block_index == 0 %}false{% else %}true{% endif %}"
   >
-    <p class="announcement-bar__text">
+    <div class="announcement-bar__text">
       {{ block.settings.text }}
-    </p>
+    </div>
 
     {% if block_settings.link != blank %}
       <a
@@ -120,10 +120,10 @@
   "tag": null,
   "settings": [
     {
-      "type": "inline_richtext",
+      "type": "richtext",
       "id": "text",
       "label": "t:settings.text",
-      "default": "t:text_defaults.shop_our_latest_arrivals"
+      "default": "<p>Shop our latest arrivals</p>"
     },
     {
       "type": "url",
