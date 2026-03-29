@@ -95,3 +95,27 @@
 #header-component[data-menu-style='drawer'] .search-action {
   grid-area: rightA;
 }
+
+/* ==========================================================================
+   Bundle Banner — Gradient overlay on product image
+   Applied to the image block inside a section using scheme-bundle-banner.
+   The gradient blends the product image into the dark teal background.
+   ========================================================================== */
+
+.color-scheme-bundle-banner .block-type-image {
+  position: relative;
+}
+
+.color-scheme-bundle-banner .block-type-image::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to right,
+    #082D35 0%,
+    rgba(8, 45, 53, 0.6) 25%,
+    transparent 50%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
