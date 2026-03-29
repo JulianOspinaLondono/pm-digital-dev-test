@@ -55,13 +55,13 @@
               "type": "text",
               "name": "t:names.heading",
               "settings": {
-                "text": "<h2>Our signature product</h2>",
+                "text": "<h2>Smart stack, smarter price - shop curated bundles and <em>save 30%.</em></h2>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
                 "type_preset": "h3",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
+                "font": "var(--font-heading--family)",
+                "font_size": "2.625rem",
                 "line_height": "normal",
                 "letter_spacing": "normal",
                 "case": "none",
@@ -80,13 +80,13 @@
             "text_N4gFaU": {
               "type": "text",
               "settings": {
-                "text": "<p>Made with care and unconditionally loved by our customers, this signature bestseller exceeds all expectations.</p>",
+                "text": "<p>Clinically informed formulas that support energy, balance, and everyday wellness.</p>",
                 "width": "fit-content",
                 "max_width": "narrow",
                 "alignment": "left",
                 "type_preset": "rte",
                 "font": "var(--font-body--family)",
-                "font_size": "1rem",
+                "font_size": "0.875rem",
                 "line_height": "normal",
                 "letter_spacing": "normal",
                 "case": "none",
@@ -178,7 +178,6 @@
     }
   },
   "order": [
-    "section_mktj8k",
-    "bundle_banner_section"
+    "section_mktj8k"
   ]
 }

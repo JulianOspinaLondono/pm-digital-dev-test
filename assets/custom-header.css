@@ -102,6 +102,12 @@
    The gradient blends the product image into the dark teal background.
    ========================================================================== */
 
+/* Heading highlight — <em> renders in cyan */
+.color-scheme-bundle-banner .text-block em {
+  font-style: normal;
+  color: var(--color-primary);
+}
+
 .color-scheme-bundle-banner .block-type-image {
   position: relative;
 }
