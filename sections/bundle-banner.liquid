@@ -78,9 +78,8 @@
     position: relative;
     overflow: hidden;
     background-color: #082D35;
-    min-height: 420px;
     display: flex;
-    align-items: flex-end;
+    flex-direction: column;
   }
 
   /* ---------- Background image (glow + teal) ---------- */
@@ -97,11 +96,9 @@
   /* ---------- Product image ---------- */
 
   .bundle-banner__product-wrap {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    top: 0;
-    width: 65%;
+    position: relative;
+    width: 100%;
+    height: 300px;
     z-index: 1;
   }
 
@@ -110,7 +107,7 @@
     position: absolute;
     inset: 0;
     z-index: 1;
-    background: linear-gradient(to right, #082D35 0%, rgba(8, 45, 53, 0) 55%);
+    background: linear-gradient(to top, #082D35 0%, rgba(8, 45, 53, 0) 55%);
   }
 
   .bundle-banner__product {
@@ -118,7 +115,7 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center center;
+    object-position: center top;
   }
 
   /* ---------- Text content ---------- */
@@ -132,7 +129,7 @@
     max-width: var(--page-content-width, 1200px);
     width: 100%;
     margin-inline: auto;
-    padding: 40px var(--page-margin, 20px) 32px;
+    padding: 0 var(--page-margin, 20px) 32px;
   }
 
   .bundle-banner__heading {
@@ -188,12 +185,26 @@
 
   @media screen and (min-width: 750px) {
     .bundle-banner {
+      flex-direction: row;
       min-height: 50vh;
       align-items: center;
     }
 
     .bundle-banner__product-wrap {
+      position: absolute;
+      right: 0;
+      top: 0;
+      bottom: 0;
       width: 55%;
+      height: auto;
+    }
+
+    .bundle-banner__product-wrap::before {
+      background: linear-gradient(to right, #082D35 0%, rgba(8, 45, 53, 0) 55%);
+    }
+
+    .bundle-banner__product {
+      object-position: center center;
     }
 
     .bundle-banner__content {
