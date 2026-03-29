@@ -3,8 +3,8 @@
   assign subheading = section.settings.subheading
   assign cta_label = section.settings.cta_label
   assign cta_link = section.settings.cta_link
-  assign background_image = section.settings.background_image
-  assign background_image_mobile = section.settings.background_image_mobile
+  assign product_image = section.settings.product_image
+  assign product_image_mobile = section.settings.product_image_mobile
   assign highlight_color = section.settings.highlight_color
 %}
 
@@ -13,11 +13,11 @@
   id="bundle-banner-{{ section.id }}"
   style="
     --bundle-banner-highlight: {{ highlight_color }};
-    {% if background_image != blank %}
-      --bundle-banner-bg-desktop: url('{{ background_image | image_url: width: 1920 }}');
+    {% if product_image != blank %}
+      --bundle-banner-product-desktop: url('{{ product_image | image_url: width: 1200 }}');
     {% endif %}
-    {% if background_image_mobile != blank %}
-      --bundle-banner-bg-mobile: url('{{ background_image_mobile | image_url: width: 780 }}');
+    {% if product_image_mobile != blank %}
+      --bundle-banner-product-mobile: url('{{ product_image_mobile | image_url: width: 780 }}');
     {% endif %}
   "
 >
@@ -49,19 +49,16 @@
     overflow: hidden;
     color: #fff;
 
-    /*
-      Background layers (bottom to top):
-      1. Base dark gradient
-      2. Cyan glow
-      3. Product image (right side)
-      4. Left-to-right dark overlay (blends product into gradient)
-    */
     background-color: #082D35;
     background-image:
-      linear-gradient(to right, rgba(8, 45, 53, 1) 0%, rgba(8, 45, 53, 0.85) 25%, rgba(8, 45, 53, 0) 55%),
-      var(--bundle-banner-bg-mobile, none);
-    background-position: center, center center;
-    background-size: 100% 100%, cover;
+      var(--bundle-banner-product-mobile, none),
+      radial-gradient(ellipse at 50% 0%, rgba(0, 188, 221, 0.25) 0%, transparent 55%);
+    background-position:
+      center top,
+      center top;
+    background-size:
+      85% auto,
+      100% 100%;
     background-repeat: no-repeat;
 
     min-height: 55vh;
@@ -137,10 +134,14 @@
   @media screen and (min-width: 750px) {
     .bundle-banner {
       background-image:
-        linear-gradient(to right, rgba(8, 45, 53, 1) 0%, rgba(8, 45, 53, 0.85) 25%, rgba(8, 45, 53, 0) 55%),
-        var(--bundle-banner-bg-desktop, none);
-      background-position: center, center center;
-      background-size: 100% 100%, cover;
+        var(--bundle-banner-product-desktop, none),
+        radial-gradient(ellipse at 55% 0%, rgba(0, 188, 221, 0.2) 0%, transparent 50%);
+      background-position:
+        right center,
+        center top;
+      background-size:
+        60% auto,
+        100% 100%;
       background-repeat: no-repeat;
 
       min-height: 55vh;
@@ -199,19 +200,19 @@
     },
     {
       "type": "header",
-      "content": "Background imagery"
+      "content": "Product imagery"
     },
     {
       "type": "image_picker",
-      "id": "background_image",
-      "label": "Background image (desktop)",
-      "info": "Full background image with products and glow. A dark gradient overlay is applied automatically on the left side."
+      "id": "product_image",
+      "label": "Product image (desktop)",
+      "info": "Positioned on the right side. PNG with transparent background recommended."
     },
     {
       "type": "image_picker",
-      "id": "background_image_mobile",
-      "label": "Background image (mobile)",
-      "info": "Full background image for mobile. A dark gradient overlay is applied automatically."
+      "id": "product_image_mobile",
+      "label": "Product image (mobile)",
+      "info": "Positioned at the top. PNG with transparent background recommended."
     },
     {
       "type": "header",
