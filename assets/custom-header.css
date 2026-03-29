@@ -49,13 +49,6 @@
 /* --- Desktop (1440w) --- */
 
 @media screen and (min-width: 750px) {
-  /* Force balanced columns so the center menu is truly centered */
-  #header-component .header__columns {
-    --header-left: 1fr;
-    --header-right: 1fr;
-    --header-center: auto;
-  }
-
   #header-component[data-menu-style='menu'] .header-menu .menu-list__link {
     padding-inline: var(--padding-lg);
   }
