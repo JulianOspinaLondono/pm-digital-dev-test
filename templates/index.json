@@ -9,6 +9,18 @@
  */
 {
   "sections": {
+    "bundle_banner_gAQjPq": {
+      "type": "bundle-banner",
+      "name": "Bundle Banner",
+      "settings": {
+        "heading": "Smart stack, smarter price - shop curated bundles and <em>save 30%.</em>",
+        "subheading": "Clinically informed formulas that support energy, balance, and everyday wellness.",
+        "cta_label": "Shop Bundles",
+        "cta_link": "",
+        "product_image": "shopify://shop_images/b81a18eb599ce6479fa22b1b0f8e32ba46d1b599_1.png",
+        "highlight_color": "#00BCDD"
+      }
+    },
     "section_mktj8k": {
       "type": "section",
       "blocks": {
@@ -329,6 +341,7 @@
     }
   },
   "order": [
+    "bundle_banner_gAQjPq",
     "section_mktj8k",
     "collection_list_DCJtfC"
   ]
