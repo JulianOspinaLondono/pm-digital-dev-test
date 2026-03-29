@@ -32,15 +32,8 @@
   background-color: #fff;
 }
 
-#header-component.header[transparent] .header__row:first-child {
-  border-radius: clamp(24px, 3.125vw, 45px) clamp(24px, 3.125vw, 45px) 0 0;
-}
-
-#header-component.header[transparent] .header__row:last-child {
-  border-radius: 0 0 clamp(24px, 3.125vw, 45px) clamp(24px, 3.125vw, 45px);
-}
-
-#header-component.header[transparent] .header__row:only-child {
+/* Border-radius applied directly to the row */
+#header-component.header[transparent] .header__row--top {
   border-radius: clamp(24px, 3.125vw, 45px);
 }
 
