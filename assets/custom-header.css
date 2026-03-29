@@ -78,7 +78,7 @@
   }
 
   /* Move search icon to the right side (theme puts it on left by default) */
-  #header-component .search-action {
+  #header-component .header__columns .search-action {
     grid-area: rightA;
   }
 }
@@ -92,6 +92,6 @@
   display: none;
 }
 
-#header-component[data-menu-style='drawer'] .search-action {
+#header-component[data-menu-style='drawer'] .header__columns .search-action {
   grid-area: rightA;
 }
