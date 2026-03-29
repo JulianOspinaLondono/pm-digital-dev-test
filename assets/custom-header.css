@@ -6,15 +6,6 @@
    class-based rules (0,x,0) without needing !important.
    ========================================================================== */
 
-/* --- Announcement Bar --- */
-
-/* Underline all announcement text — matches Figma design */
-.announcement-bar .announcement-bar__text {
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  text-decoration-thickness: 1px;
-}
-
 /* --- Floating Header Card --- */
 
 #header-component.header[transparent] {
