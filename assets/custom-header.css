@@ -22,7 +22,7 @@
   --header-logo-inverse-display: none;
   background: #fff;
   top: 32px;
-  max-width: var(--page-content-width);
+  max-width: calc(100% - var(--page-margin, 40px) * 2);
   margin-inline: auto;
   border-radius: clamp(24px, 3.125vw, 45px);
   overflow: clip;
