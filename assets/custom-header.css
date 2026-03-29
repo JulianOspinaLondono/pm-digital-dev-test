@@ -58,7 +58,7 @@
 
 @media screen and (max-width: 749px) {
   .announcement-bar .announcement-bar__text {
-    font-size: 10px;
+    font-size: 12px;
   }
 
   #header-component.header[transparent] {

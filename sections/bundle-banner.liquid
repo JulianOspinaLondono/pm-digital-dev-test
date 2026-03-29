@@ -19,6 +19,7 @@
         {{ background_image | image_url: width: 1920 }} 1920w
       "
       sizes="100vw"
+      role="presentation"
       alt="{{ background_image.alt | default: '' | escape }}"
       loading="eager"
       fetchpriority="high"
@@ -99,7 +100,7 @@
   .bundle-banner__product-wrap {
     position: relative;
     width: 100%;
-    height: clamp(474px, 121vw, 474px);
+    height: 474px;
     z-index: 1;
   }
 
