@@ -13,8 +13,15 @@
     <img
       class="bundle-banner__bg"
       src="{{ background_image | image_url: width: 1920 }}"
+      srcset="
+        {{ background_image | image_url: width: 780 }} 780w,
+        {{ background_image | image_url: width: 1200 }} 1200w,
+        {{ background_image | image_url: width: 1920 }} 1920w
+      "
+      sizes="100vw"
       alt=""
-      loading="lazy"
+      loading="eager"
+      fetchpriority="high"
       width="{{ background_image.width }}"
       height="{{ background_image.height }}"
     >
@@ -25,8 +32,14 @@
       <img
         class="bundle-banner__product"
         src="{{ product_image | image_url: width: 1200 }}"
+        srcset="
+          {{ product_image | image_url: width: 600 }} 600w,
+          {{ product_image | image_url: width: 900 }} 900w,
+          {{ product_image | image_url: width: 1200 }} 1200w
+        "
+        sizes="(min-width: 750px) 55vw, 65vw"
         alt="{{ product_image.alt | escape }}"
-        loading="lazy"
+        loading="eager"
         width="{{ product_image.width }}"
         height="{{ product_image.height }}"
       >
@@ -184,7 +197,7 @@
     }
 
     .bundle-banner__content {
-      padding: 60px var(--page-margin, 40px);
+      padding: 0;
       gap: 16px;
     }
 
