@@ -25,7 +25,6 @@
   max-width: var(--page-content-width);
   margin-inline: auto;
   border-radius: 42px;
-  overflow: hidden;
 }
 
 /* White bg on rows — theme sets transparent, we need white */
