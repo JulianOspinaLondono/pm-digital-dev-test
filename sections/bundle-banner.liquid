@@ -8,7 +8,7 @@
   assign highlight_color = section.settings.highlight_color
 %}
 
-<section class="bundle-banner" id="bundle-banner-{{ section.id }}">
+<section class="bundle-banner" id="bundle-banner-{{ section.id }}" aria-label="Bundle promotion banner">
   {%- if background_image != blank -%}
     <img
       class="bundle-banner__bg"
@@ -19,7 +19,7 @@
         {{ background_image | image_url: width: 1920 }} 1920w
       "
       sizes="100vw"
-      alt=""
+      alt="{{ background_image.alt | default: '' | escape }}"
       loading="eager"
       fetchpriority="high"
       width="{{ background_image.width }}"
@@ -37,7 +37,7 @@
           {{ product_image | image_url: width: 900 }} 900w,
           {{ product_image | image_url: width: 1200 }} 1200w
         "
-        sizes="(min-width: 750px) 55vw, 65vw"
+        sizes="(min-width: 750px) 55vw, 100vw"
         alt="{{ product_image.alt | escape }}"
         loading="eager"
         width="{{ product_image.width }}"
@@ -80,6 +80,7 @@
     background-color: #082D35;
     display: flex;
     flex-direction: column;
+    border-radius: 0 0 24px 24px;
   }
 
   /* ---------- Background image (glow + teal) ---------- */
@@ -209,7 +210,7 @@
     }
 
     .bundle-banner__content {
-      padding: 0 0 60px;
+      padding: 0 0 8rem;
       gap: 16px;
     }
 

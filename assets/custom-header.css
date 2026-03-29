@@ -77,7 +77,7 @@
     display: none;
   }
 
-  /* Move search icon to the right side (theme puts it on leftB by default) */
+  /* Move search icon to the right side (theme puts it on left by default) */
   #header-component .search-action {
     grid-area: rightA;
   }
@@ -94,44 +94,4 @@
 
 #header-component[data-menu-style='drawer'] .search-action {
   grid-area: rightA;
-}
-
-/* ==========================================================================
-   Bundle Banner — Gradient overlay on product image
-   Applied to the image block inside a section using scheme-bundle-banner.
-   The gradient blends the product image into the dark teal background.
-   ========================================================================== */
-
-/* Reset the transparent header top offset for the bundle banner.
-   The theme adds padding-top to the first section to avoid content
-   hiding behind the floating header. We remove it so the product
-   image extends to the full height of the section. */
-.color-scheme-bundle-banner.spacing-style,
-.color-scheme-bundle-banner .spacing-style {
-  --section-top-offset: 0px;
-}
-
-/* Heading highlight — <em> renders in cyan */
-.color-scheme-bundle-banner .text-block em {
-  font-style: normal;
-  color: var(--color-primary);
-}
-
-/* Gradient overlay on the product image */
-.color-scheme-bundle-banner .image-block {
-  position: relative;
-}
-
-.color-scheme-bundle-banner .image-block::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to right,
-    rgba(8, 45, 53, 1) 0%,
-    rgba(8, 45, 53, 0.4) 30%,
-    rgba(8, 45, 53, 0) 55%
-  );
-  pointer-events: none;
-  z-index: 1;
 }
