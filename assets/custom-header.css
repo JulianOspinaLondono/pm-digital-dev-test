@@ -27,9 +27,23 @@
   border-radius: clamp(24px, 3.125vw, 45px);
 }
 
-/* White bg on rows — theme sets transparent, we need white */
+/* White bg on rows — theme sets transparent, we need white.
+   Border-radius on first/last row so the card shape shows
+   without needing overflow:hidden (which breaks dropdowns). */
 #header-component.header[transparent] .header__row {
   background-color: #fff;
+}
+
+#header-component.header[transparent] .header__row:first-child {
+  border-radius: clamp(24px, 3.125vw, 45px) clamp(24px, 3.125vw, 45px) 0 0;
+}
+
+#header-component.header[transparent] .header__row:last-child {
+  border-radius: 0 0 clamp(24px, 3.125vw, 45px) clamp(24px, 3.125vw, 45px);
+}
+
+#header-component.header[transparent] .header__row:only-child {
+  border-radius: clamp(24px, 3.125vw, 45px);
 }
 
 /* Remove default border — rounded card shape is enough */
