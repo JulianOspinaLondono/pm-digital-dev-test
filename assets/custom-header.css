@@ -117,6 +117,13 @@
   color: var(--color-primary);
 }
 
+/* Text group constrained to page width when section is full-width */
+.color-scheme-bundle-banner .group {
+  max-width: var(--page-content-width);
+  margin-inline: auto;
+  padding-inline: var(--page-margin);
+}
+
 /* Gradient overlay on the product image */
 .color-scheme-bundle-banner .image-block {
   position: relative;
