@@ -3,46 +3,24 @@
   assign subheading = section.settings.subheading
   assign cta_label = section.settings.cta_label
   assign cta_link = section.settings.cta_link
-  assign bg_desktop = section.settings.background_image_desktop
-  assign bg_mobile = section.settings.background_image_mobile
+  assign product_image = section.settings.product_image
+  assign product_image_mobile = section.settings.product_image_mobile
   assign highlight_color = section.settings.highlight_color
 %}
 
 <section
   class="bundle-banner"
   id="bundle-banner-{{ section.id }}"
-  style="--bundle-banner-highlight: {{ highlight_color }};"
+  style="
+    --bundle-banner-highlight: {{ highlight_color }};
+    {% if product_image != blank %}
+      --bundle-banner-product-desktop: url('{{ product_image | image_url: width: 1200 }}');
+    {% endif %}
+    {% if product_image_mobile != blank %}
+      --bundle-banner-product-mobile: url('{{ product_image_mobile | image_url: width: 780 }}');
+    {% endif %}
+  "
 >
-  {%- if bg_desktop != blank -%}
-    <picture class="bundle-banner__bg">
-      {%- if bg_mobile != blank -%}
-        <source
-          media="(max-width: 749px)"
-          srcset="
-            {{ bg_mobile | image_url: width: 390 }} 390w,
-            {{ bg_mobile | image_url: width: 600 }} 600w,
-            {{ bg_mobile | image_url: width: 780 }} 780w
-          "
-          sizes="100vw"
-        >
-      {%- endif -%}
-      <img
-        src="{{ bg_desktop | image_url: width: 1920 }}"
-        srcset="
-          {{ bg_desktop | image_url: width: 1200 }} 1200w,
-          {{ bg_desktop | image_url: width: 1440 }} 1440w,
-          {{ bg_desktop | image_url: width: 1920 }} 1920w
-        "
-        sizes="100vw"
-        alt=""
-        loading="eager"
-        fetchpriority="high"
-        width="{{ bg_desktop.width }}"
-        height="{{ bg_desktop.height }}"
-      >
-    </picture>
-  {%- endif -%}
-
   <div class="bundle-banner__content">
     {% if heading != blank %}
       <h2 class="bundle-banner__heading">{{ heading }}</h2>
@@ -62,39 +40,45 @@
 
 {% stylesheet %}
   /* ==========================================================================
-     Bundle Banner — Hero with background image
-     Mobile first. Background contains gradient + product imagery.
-     Text is overlaid on the left side.
+     Bundle Banner — Hero with CSS gradient + product image
+     Mobile first.
      ========================================================================== */
 
   .bundle-banner {
     position: relative;
     overflow: hidden;
-    background: #082D35;
     color: #fff;
+
+    /* Gradient background */
+    background:
+      radial-gradient(ellipse at 60% 0%, rgba(0, 188, 221, 0.2) 0%, transparent 50%),
+      linear-gradient(to bottom, #0B3039 0%, #082D35 100%);
+
+    /* Product image as positioned background on the right */
+    background-image:
+      var(--bundle-banner-product-mobile, none),
+      radial-gradient(ellipse at 50% 0%, rgba(0, 188, 221, 0.2) 0%, transparent 50%),
+      linear-gradient(to bottom, #0B3039 0%, #082D35 100%);
+    background-position: center top, center top, center;
+    background-size: 90% auto, 100% 100%, 100% 100%;
+    background-repeat: no-repeat;
+
+    /* Mobile: taller to fit products on top + text below */
+    min-height: 580px;
+    display: flex;
+    align-items: flex-end;
   }
 
-  /* Background image — full cover, contains gradient + products */
-  .bundle-banner__bg {
-    display: block;
-    width: 100%;
-  }
+  /* --- Text content --- */
 
-  .bundle-banner__bg img {
-    display: block;
-    width: 100%;
-    height: auto;
-  }
-
-  /* Text overlay — positioned over the background */
   .bundle-banner__content {
-    position: absolute;
-    inset: 0;
+    position: relative;
+    z-index: 1;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
     gap: var(--gap-sm);
     max-width: var(--page-content-width);
+    width: 100%;
     margin-inline: auto;
     padding: 0 var(--page-margin) 32px;
   }
@@ -151,9 +135,23 @@
      ========================================================================== */
 
   @media screen and (min-width: 750px) {
+    .bundle-banner {
+      /* Desktop: product image on the right side */
+      background-image:
+        var(--bundle-banner-product-desktop, none),
+        radial-gradient(ellipse at 60% 0%, rgba(0, 188, 221, 0.18) 0%, transparent 50%),
+        linear-gradient(to bottom, #0B3039 0%, #082D35 100%);
+      background-position: right bottom, center top, center;
+      background-size: 55% auto, 100% 100%, 100% 100%;
+      background-repeat: no-repeat;
+
+      min-height: 480px;
+      align-items: center;
+    }
+
     .bundle-banner__content {
-      justify-content: center;
-      padding: 0 var(--page-margin);
+      padding: 60px var(--page-margin);
+      max-width: var(--page-content-width);
       gap: var(--gap-lg);
     }
 
@@ -203,19 +201,19 @@
     },
     {
       "type": "header",
-      "content": "Background"
+      "content": "Product imagery"
     },
     {
       "type": "image_picker",
-      "id": "background_image_desktop",
-      "label": "Background image (desktop)",
-      "info": "Includes gradient and product imagery. Recommended: 1920×600px"
+      "id": "product_image",
+      "label": "Product image (desktop)",
+      "info": "Positioned on the right side. PNG with transparent background recommended."
     },
     {
       "type": "image_picker",
-      "id": "background_image_mobile",
-      "label": "Background image (mobile)",
-      "info": "Different composition for small screens. Recommended: 780×900px"
+      "id": "product_image_mobile",
+      "label": "Product image (mobile)",
+      "info": "Positioned at the top. PNG with transparent background recommended."
     },
     {
       "type": "header",
