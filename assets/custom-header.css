@@ -117,10 +117,18 @@
   color: var(--color-primary);
 }
 
-/* Section border-radius bottom */
+/* Section: border-radius + min-height (image is absolute so won't define height) */
 .color-scheme-bundle-banner {
   border-radius: 0 0 45px 45px;
   overflow: hidden;
+  position: relative;
+  min-height: 480px;
+}
+
+@media screen and (max-width: 749px) {
+  .color-scheme-bundle-banner {
+    min-height: 420px;
+  }
 }
 
 /* Image block as full-cover background */
