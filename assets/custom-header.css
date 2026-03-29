@@ -49,6 +49,11 @@
 /* --- Desktop (1440w) --- */
 
 @media screen and (min-width: 750px) {
+  /* Center the nav menu links within the menu list */
+  #header-component .header-menu .overflow-menu::part(list) {
+    justify-content: center;
+  }
+
   #header-component[data-menu-style='menu'] .header-menu .menu-list__link {
     padding-inline: var(--padding-lg);
   }
