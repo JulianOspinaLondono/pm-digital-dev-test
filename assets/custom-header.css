@@ -117,11 +117,11 @@
   color: var(--color-primary);
 }
 
-.color-scheme-bundle-banner .block-type-image {
+.color-scheme-bundle-banner .image-block {
   position: relative;
 }
 
-.color-scheme-bundle-banner .block-type-image::after {
+.color-scheme-bundle-banner .image-block::after {
   content: '';
   position: absolute;
   inset: 0;
